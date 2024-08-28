@@ -8,7 +8,7 @@ object FilterArticleCorpusApp extends App {
   val term = "sitemap"
   val inFileName = args.lift(0).getOrElse(s"./scraper/corpora/ghana/$term/articlecorpus.txt")
   val outFileName = args.lift(1).getOrElse(s"./scraper/corpora/ghana/$term/articlecorpus-filtered.txt")
-  val filter = happyGhanaFilter _
+  val filter = vovWorldFilter _
 
   def adomOnlineFilter(line: String): Boolean = { true &&
     line.endsWith("/") && // Articles look like a directory.
@@ -37,6 +37,10 @@ object FilterArticleCorpusApp extends App {
       "https://www.adomonline.com/contact-us/"
     ).contains(line) &&
     true
+  }
+
+  def vovWorldFilter(line: String): Boolean = { true &&
+  !line.startsWith("https://vovworld.vn/en-US/media/") && true
   }
 
   def theChronicleFilter(line: String): Boolean = { true &&

@@ -13,6 +13,7 @@ object IndexDownloaderApp extends App {
   val term = "sitemap"
   val corpusFileName = args.lift(0).getOrElse(s"./scraper/corpora/ghana/$term/indexcorpus.txt")
   val baseDirName = args.lift(1).getOrElse(s"../corpora/ghana/$term/indexes")
+  System.out.println("Working Directory = " + System.getProperty("user.dir"))
   val corpus = PageCorpus(corpusFileName)
   val downloader = new PageCorpusDownloader(corpus)
   val browser: Browser = new HabitusBrowser()

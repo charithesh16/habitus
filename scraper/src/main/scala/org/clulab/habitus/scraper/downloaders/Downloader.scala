@@ -40,7 +40,17 @@ class PageCorpusDownloader(val corpus: PageCorpus) {
     new DeltaDownloader(),
     new GoogleDownloader(),
     new MiningReviewDownloader(),
-    new MiningDownloader()
+    new MiningDownloader(),
+    new VietnamBriefingDownloader(),
+    new MiningVietnamDownloader(),
+    new VietnamNewsDownloader(),
+    new VietnamInvestmentReviewDownloader(),
+    new ReutersDownloader(),
+    new VOANewsDownloader(),
+    new AsiaFinancialDownloader(),
+    new VOVWorldDownloader(),
+    new VietnamPlusDownloader(),
+    new TouitreNewsDownloader()
   )
 
   def getPageDownloader(page: Page): PageDownloader = {
@@ -87,6 +97,7 @@ class SearchCorpusDownloader(val corpus: SearchCorpus) {
     new HappyGhanaDownloader(),
     new TheChronicleDownloader(),
     new ThreeNewsDownloader(),
+    new VietnamBriefingDownloader(),
     new TheIndependentDownloader(),
     new TheObserverDownloader(),
     new KfmDownloader(),
@@ -99,7 +110,10 @@ class SearchCorpusDownloader(val corpus: SearchCorpus) {
     new DeltaDownloader(),
     new GoogleDownloader(),
     new MiningReviewDownloader(),
-    new MiningDownloader()
+    new MiningDownloader(),
+    new MiningVietnamDownloader(),
+    new VietnamNewsDownloader(),
+    new AsiaFinancialDownloader()
   )
 
   def getPageDownloader(page: Page): PageDownloader = {

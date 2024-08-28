@@ -7,7 +7,7 @@ import org.clulab.habitus.scraper.downloaders.PageCorpusDownloader
 
 object ArticleDownloaderApp extends App {
   val term = "sitemap"
-  val corpusFileName = args.lift(0).getOrElse(s"./scraper/corpora/ghana/$term/articlecorpus-filtered.txt")
+  val corpusFileName = args.lift(0).getOrElse(s"./scraper/corpora/ghana/$term/articlecorpus.txt")
   val baseDirName = args.lift(1).getOrElse(s"../corpora/ghana/$term/articles")
   val corpus = PageCorpus(corpusFileName)
   val downloader = new PageCorpusDownloader(corpus)

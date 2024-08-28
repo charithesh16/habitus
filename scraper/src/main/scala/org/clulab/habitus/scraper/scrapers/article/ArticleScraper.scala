@@ -63,8 +63,15 @@ class CorpusArticleScraper(val corpus: PageCorpus) {
     new MiningArticleScraper(),
     new PdfFileArticleScraper(),
     new MailFileArticleScraper(),
-    new InterviewFileArticleScraper()
-  )
+    new InterviewFileArticleScraper(),
+    new MiningVietnamArticleScraper(),
+    new VietnamNewsArticleScraper(),
+    new VietnamInvestmentReviewArticleScraper(),
+    new VOANewsArticleScraper(),
+    new AsiaFinancialArticleScraper(),
+    new VOVWorldArticleScraper(),
+    new VietnamPlusArticleScraper(),
+    new TuoitreNewsArticleScraper()  )
 
   def getPageScraper(page: Page): PageArticleScraper = {
     val scraperOpt = scrapers.find(_.matches(page))
