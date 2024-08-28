@@ -45,3 +45,4 @@ dockerGlove/output/
 
 # eidos
 cache/
+/scraper/src/main/scala/org/clulab/habitus/scraper/google/
