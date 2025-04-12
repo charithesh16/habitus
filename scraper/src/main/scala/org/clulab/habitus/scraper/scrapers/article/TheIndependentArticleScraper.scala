@@ -38,6 +38,6 @@ class TheIndependentArticleScraper extends PageArticleScraper(TheIndependentDoma
       .mkString("\n\n")
 
     // TODO: Possibly remove 0x9d.
-    ArticleScrape(page.url, Some(title), dateLineOpt, byLineOpt, text)
+    ArticleScrape(page.url, Some(title), dateLineOpt, byLineOpt, text,Some(""))
   }
 }

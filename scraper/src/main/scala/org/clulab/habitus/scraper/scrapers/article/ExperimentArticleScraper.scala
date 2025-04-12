@@ -17,7 +17,7 @@ class ExperimentArticleScraper extends PageArticleScraper(ExperimentDomain) {
   def scrape(browser: Browser, page: Page, textLocationName: String): ArticleScrape = {
     val text = FileUtils.getTextFromFile(textLocationName)
 
-    ArticleScrape(page.url, None, None, None, text)
+    ArticleScrape(page.url, None, None, None, text,Some(""))
   }
 
   def readText(page: Page, baseDirName: String): (String, String, String) = {

@@ -38,7 +38,7 @@ class SaedArticleScraper extends PageArticleScraper(SaedDomain) {
     val pdfMetadata = GoogleArticleScraper.readPdfMetadata(pdfLocationName)
 
     // ArticleScrape(page.url, Some(title), Some(dateline), Some(byline), text)
-    ArticleScrape(page.url, pdfMetadata.titleOpt, pdfMetadata.datelineOpt, pdfMetadata.bylineOpt, text)
+    ArticleScrape(page.url, pdfMetadata.titleOpt, pdfMetadata.datelineOpt, pdfMetadata.bylineOpt, text,Some(""))
   }
 
   def readText(page: Page, baseDirName: String): (String, String, String) = {

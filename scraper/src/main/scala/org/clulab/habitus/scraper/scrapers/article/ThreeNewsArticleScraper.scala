@@ -70,6 +70,6 @@ class ThreeNewsArticleScraper extends PageArticleScraper(ThreeNewsDomain) {
         }
         else text
 
-    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, cleanText)
+    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, cleanText,Some(""))
   }
 }

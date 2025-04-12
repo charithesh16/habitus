@@ -58,6 +58,6 @@ class GhanaWebArticleScraper extends PageArticleScraper(GhanaWebDomain) {
 
     if (text.isEmpty)
       println("Why?")
-    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text)
+    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text,Some(""))
   }
 }

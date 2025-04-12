@@ -36,6 +36,6 @@ class TheObserverArticleScraper extends PageArticleScraper(TheObserverDomain) {
       .filter(_.nonEmpty)
       .mkString("\n\n")
 
-    ArticleScrape(page.url, Some(title), dateLineOpt, byLineOpt, text)
+    ArticleScrape(page.url, Some(title), dateLineOpt, byLineOpt, text,Some(""))
   }
 }

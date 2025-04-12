@@ -19,7 +19,7 @@ class PdfFileArticleScraper extends PageArticleScraper(PdfDomain) {
     val text = GoogleArticleScraper.pdf2txt.process(rawText, GoogleArticleScraper.loops)
     val pdfMetadata = GoogleArticleScraper.readPdfMetadata(pdfLocationName)
 
-    ArticleScrape(page.url, pdfMetadata.titleOpt, pdfMetadata.datelineOpt, pdfMetadata.bylineOpt, text)
+    ArticleScrape(page.url, pdfMetadata.titleOpt, pdfMetadata.datelineOpt, pdfMetadata.bylineOpt, text,pdfMetadata.subject)
   }
 
   def readPdf(page: Page, baseDirName: String): (String, String, String) = {

@@ -5,7 +5,7 @@ import org.clulab.habitus.scraper.{DomainSpecific, Page}
 import org.clulab.habitus.scraper.corpora.{PageCorpus, SearchCorpus}
 import org.clulab.habitus.scraper.domains.Domain
 import org.clulab.habitus.scraper.downloaders.sitemap.{RobotsDownloader, SitemapDownloader}
-import org.clulab.utils.ProgressBar
+import org.clulab.utils.{ProgressBar, ThreadUtils}
 
 import scala.util.{Random, Try}
 
@@ -50,7 +50,18 @@ class PageCorpusDownloader(val corpus: PageCorpus) {
     new AsiaFinancialDownloader(),
     new VOVWorldDownloader(),
     new VietnamPlusDownloader(),
-    new TouitreNewsDownloader()
+    new TouitreNewsDownloader(),
+    new BaolaocaiDomain(),
+    new TheInvestorDownloader(),
+    new BaomoiDownloader(),
+    new NhandanDownloader(),
+    new VTCNewsDownloader(),
+    new BNewsDownloader(),
+    new VietnamTimesDownloader(),
+    new BaobackanDownloader(),
+    new AnninhthudoDownloader(),
+    new BaohatinhDownloader(),
+    new BaophapluatDownloader()
   )
 
   def getPageDownloader(page: Page): PageDownloader = {
@@ -62,14 +73,16 @@ class PageCorpusDownloader(val corpus: PageCorpus) {
   def download(browser: Browser, baseDirName: String): Unit = {
     val random = new Random(42)
 //    val distinctCorpusItems = random.shuffle(corpus.items.distinct)
-    val distinctCorpusItems = corpus.items.distinct
-
+    val distinctCorpusItems = ThreadUtils.parallelize(corpus.items, 8)
+//    val distinctCorpusItems = corpus.items.distinct
 //    val progressBar = ProgressBar("PageCorpusDownloader.download", distinctCorpusItems)
 
     distinctCorpusItems.foreach { page =>
-      // progressBar.setExtraMessage(page.url.toString + " ")
+//       progressBar.setExtraMessage(page.url.toString + " ")
 
       val downloader = getPageDownloader(page)
+
+//      println(s"Downloading of ${page.url.toString}!")
 
       // Avoid this error to make real download errors all the more obvious.
       if (downloader.isValidPage(page)) {

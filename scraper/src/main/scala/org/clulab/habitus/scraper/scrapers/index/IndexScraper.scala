@@ -75,7 +75,8 @@ class CorpusIndexScraper(val corpus: PageCorpus) {
     new ReutersIndexScraper(),
     new VOANewsIndexScraper(),
     new AsiaFinancialIndexScraper(),
-    new VOVWorldIndexScraper()
+    new VOVWorldIndexScraper(),
+    new BaomoiIndexScraper()
   )
 
   def getPageScraper(page: Page): PageIndexScraper = {

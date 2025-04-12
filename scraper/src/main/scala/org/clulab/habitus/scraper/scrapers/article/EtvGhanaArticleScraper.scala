@@ -63,6 +63,6 @@ class EtvGhanaArticleScraper extends PageArticleScraper(EtvGhanaDomain) {
 
     if (text.contains('<') && !(text.contains("<[email protected]>") || text.contains("<-Advertisement->")))
       throw new RuntimeException("HTML was found in text!")
-    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text)
+    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text,Some(""))
   }
 }

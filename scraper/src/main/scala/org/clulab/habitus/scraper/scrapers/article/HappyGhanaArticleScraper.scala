@@ -60,6 +60,6 @@ class HappyGhanaArticleScraper extends PageArticleScraper(HappyGhanaDomain) {
 
     if (text.contains('<'))
       throw new RuntimeException("HTML was found in text!")
-    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text)
+    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text,Some(""))
   }
 }

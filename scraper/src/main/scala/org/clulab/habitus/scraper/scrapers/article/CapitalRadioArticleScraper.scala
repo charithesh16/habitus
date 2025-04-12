@@ -24,6 +24,6 @@ class CapitalRadioArticleScraper extends PageArticleScraper(CapitalRadioDomain) 
       .filter(_.nonEmpty)
       .mkString("\n\n")
 
-    ArticleScrape(page.url, Some(title), datelineOpt, bylineOpt, text)
+    ArticleScrape(page.url, Some(title), datelineOpt, bylineOpt, text,Some(""))
   }
 }

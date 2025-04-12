@@ -94,7 +94,7 @@ class AdomOnlineArticleScraper extends PageArticleScraper(AdomOnlineDomain) {
       text2
     }
     else text
-    ArticleScrape(page.url, Some(title), datelineOpt, bylineOpt, text2)
+    ArticleScrape(page.url, Some(title), datelineOpt, bylineOpt, text2,Some(""))
   }
 }
 

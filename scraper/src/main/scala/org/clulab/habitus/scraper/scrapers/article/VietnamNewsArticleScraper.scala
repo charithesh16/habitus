@@ -27,6 +27,6 @@ class VietnamNewsArticleScraper  extends PageArticleScraper(VietnamNewsDomain) {
     if (page.url.getFile.startsWith("/media-outreach/")) {
       text = (doc >> element("#abody")).text;
     }
-    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text)
+    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text,Some(""))
   }
 }

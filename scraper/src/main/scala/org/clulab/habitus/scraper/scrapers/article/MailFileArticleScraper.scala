@@ -33,7 +33,7 @@ class MailFileArticleScraper extends PageArticleScraper(MailDomain) {
       val datelineOpt = map.get("dateline")
       val bylineOpt = map.get("byline")
 
-      ArticleScrape(url, titleOpt, datelineOpt, bylineOpt, text)
+      ArticleScrape(url, titleOpt, datelineOpt, bylineOpt, text,Some(""))
     }
   }
 

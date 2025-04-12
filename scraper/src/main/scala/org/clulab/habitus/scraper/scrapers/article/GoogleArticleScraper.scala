@@ -3,7 +3,7 @@ package org.clulab.habitus.scraper.scrapers.article
 import net.ruippeixotog.scalascraper.browser.Browser
 import org.clulab.habitus.scraper.Page
 import org.clulab.habitus.scraper.domains.GoogleDomain
-import org.clulab.habitus.scraper.scrapes.ArticleScrape
+import org.clulab.habitus.scraper.scrapes.{ArticleScrape}
 import org.clulab.pdf2txt.Pdf2txt
 import org.clulab.pdf2txt.languageModel.GigawordLanguageModel
 import org.clulab.pdf2txt.preprocessor.{CasePreprocessor, LigaturePreprocessor, LineBreakPreprocessor, LinePreprocessor, NumberPreprocessor, ParagraphPreprocessor, UnicodePreprocessor, WordBreakByHyphenPreprocessor, WordBreakBySpacePreprocessor}
@@ -27,7 +27,7 @@ class GoogleArticleScraper extends PageArticleScraper(GoogleDomain) {
     val text = GoogleArticleScraper.pdf2txt.process(rawText, GoogleArticleScraper.loops)
     val pdfMetadata = GoogleArticleScraper.readPdfMetadata(pdfLocationName)
 
-    ArticleScrape(page.url, pdfMetadata.titleOpt, pdfMetadata.datelineOpt, pdfMetadata.bylineOpt, text)
+    ArticleScrape(page.url, pdfMetadata.titleOpt, pdfMetadata.datelineOpt, pdfMetadata.bylineOpt, text,pdfMetadata.subject)
   }
 
   def readPdf(page: Page, baseDirName: String): (String, String, String) = {
@@ -63,13 +63,13 @@ class GoogleArticleScraper extends PageArticleScraper(GoogleDomain) {
   }
 }
 
-case class PdfMetadata(titleOpt: Option[String], datelineOpt: Option[String], bylineOpt: Option[String])
+case class PdfMetadata(titleOpt: Option[String], datelineOpt: Option[String], bylineOpt: Option[String],subject: Option[String])
 
 object GoogleArticleScraper {
   val loops = 1
   lazy val pdf2txt = {
     val pdfConverter = new ScienceParseConverter()
-    // val pdfConverter = new TikaConverter()
+//     val pdfConverter = new TikaConverter()
     val languageModel = GigawordLanguageModel()
     val preprocessors = Array(
       new LinePreprocessor(),
@@ -91,7 +91,7 @@ object GoogleArticleScraper {
     val commandResult = OSProc("pdfinfo", "-isodates", pdfLocationName.replace('/', File.separatorChar)).call(check = false)
     val pdfMetadata = {
       if (commandResult.exitCode != 0)
-        PdfMetadata(None, None, None)
+        PdfMetadata(None, None, None,None)
       else {
         val metaText = commandResult.out.text(Codec.UTF8)
         val lines = metaText.split('\n').map(_.trim)
@@ -103,8 +103,9 @@ object GoogleArticleScraper {
         val titleOpt = map.get("Title")
         val datelineOpt = map.get("ModDate").orElse(map.get("CreationDate"))
         val bylineOpt = map.get("Author")
+        val subject = map.get("Subject")
 
-        PdfMetadata(titleOpt, datelineOpt, bylineOpt)
+        PdfMetadata(titleOpt, datelineOpt, bylineOpt,subject)
       }
     }
 

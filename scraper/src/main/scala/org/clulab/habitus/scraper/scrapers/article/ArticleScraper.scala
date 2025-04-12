@@ -71,7 +71,18 @@ class CorpusArticleScraper(val corpus: PageCorpus) {
     new AsiaFinancialArticleScraper(),
     new VOVWorldArticleScraper(),
     new VietnamPlusArticleScraper(),
-    new TuoitreNewsArticleScraper()  )
+    new TuoitreNewsArticleScraper(),
+    new BaolaocaiArticleScraper(),
+    new TheInvestorArticleScraper(),
+    new NhandanArticleScraper(),
+    new VTCNewsArticleScraper(),
+    new BNewsArticleScraper(),
+    new VietnamTimesArticleScraper(),
+    new BaobackanArticleScraper(),
+    new BaomoiArticleScraper(),
+    new AnninhthudoArticleScraper(),
+    new BaohatinhArticleScraper(),
+    new BaophapluatArticleScraper())
 
   def getPageScraper(page: Page): PageArticleScraper = {
     val scraperOpt = scrapers.find(_.matches(page))
@@ -82,6 +93,7 @@ class CorpusArticleScraper(val corpus: PageCorpus) {
   def scrape(browser: Browser, baseDirName: String): Unit = {
     // val progressBar = ProgressBar("CorpusArticleScraper.scrape", corpus.items)
     val items = corpus.items // ThreadUtils.parallelize(corpus.items, 8)
+//    val items = ThreadUtils.parallelize(corpus.items, 8)
     val index = new AtomicInteger(0)
 
     items.foreach { page =>

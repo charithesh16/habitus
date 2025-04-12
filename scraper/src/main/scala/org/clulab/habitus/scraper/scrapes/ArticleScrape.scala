@@ -6,15 +6,15 @@ import org.json4s.{DefaultFormats, Formats}
 
 import java.net.URL
 
-case class ArticleScrape(url: URL, titleOpt: Option[String], datelineOpt: Option[String], bylineOpt: Option[String], text: String) {
+case class ArticleScrape(url: URL, titleOpt: Option[String], datelineOpt: Option[String], bylineOpt: Option[String], text: String,subjectOpt: Option[String]) {
   implicit val formats: Formats = DefaultFormats
 
   def toText: String = {
     val title = titleOpt.getOrElse(ArticleScrape.none)
     val dateline = datelineOpt.getOrElse(ArticleScrape.none)
     val byline = bylineOpt.getOrElse(ArticleScrape.none)
-
-    s"$title\n\n$dateline\n\n$byline\n\n\n$text"
+    val subject = subjectOpt.getOrElse(ArticleScrape.none)
+    s"$title\n\n$dateline\n\n$byline\n\n\n$subject\n\n\n$text"
   }
 
   def toJson: String = {
@@ -23,6 +23,7 @@ case class ArticleScrape(url: URL, titleOpt: Option[String], datelineOpt: Option
         ("title" -> titleOpt) ~
         ("dateline" -> datelineOpt) ~
         ("byline" -> bylineOpt) ~
+        ("subject" -> subjectOpt) ~
         ("text" -> text)
     val json = prettyJson(renderJValue(jObject))
 

@@ -21,7 +21,7 @@ class InterviewFileArticleScraper extends PageArticleScraper(InterviewDomain) {
     val text = FileUtils.getTextFromFile(iviewLocationName)
     val metadata = InterviewFileArticleScraper.metadataMap(file)
 
-    ArticleScrape(page.url, metadata.titleOpt, metadata.datelineOpt, metadata.bylineOpt, text)
+    ArticleScrape(page.url, metadata.titleOpt, metadata.datelineOpt, metadata.bylineOpt, text,Some(""))
   }
 
   def readIview(page: Page, baseDirName: String): (String, String, String) = {

@@ -124,7 +124,7 @@ class CitiFmOnlineArticleScraper extends PageArticleScraper(CitiFmOnlineDomain) 
         }
         .mkString("\n\n")
 
-    ArticleScrape(page.url, Some(title), datelineOpt, bylineOpt, text)
+    ArticleScrape(page.url, Some(title), datelineOpt, bylineOpt, text,Some(""))
   }
 }
 

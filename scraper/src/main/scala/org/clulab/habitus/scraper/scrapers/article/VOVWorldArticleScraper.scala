@@ -32,6 +32,6 @@ class VOVWorldArticleScraper extends PageArticleScraper (VOVWorldDomain){
 //        .filter(_.nonEmpty)
 //        .mkString("\n\n")
 //    }
-    ArticleScrape(page.url, Some(title), Some(dateline.get), bylineOpt, text.get)
+    ArticleScrape(page.url, Some(title), Some(dateline.get), bylineOpt, text.get,Some(""))
   }
 }

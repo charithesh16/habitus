@@ -1,0 +1,52 @@
+package org.clulab.habitus.scraper.scrapers.article
+
+import org.clulab.habitus.scraper.domains.NhandanDomain
+import org.json4s.DefaultFormats
+import org.clulab.habitus.scraper.domains.TheInvestorDomain
+import org.json4s.DefaultFormats
+import org.json4s.DefaultFormats
+import net.ruippeixotog.scalascraper.browser.Browser
+import net.ruippeixotog.scalascraper.scraper.ContentExtractors.{element, elementList}
+import org.clulab.habitus.scraper.domains.VOANewsDomain
+import org.clulab.habitus.scraper.scrapes.ArticleScrape
+import org.json4s.jackson.JsonMethods
+import org.json4s.{DefaultFormats, JArray, JObject}
+import net.ruippeixotog.scalascraper.dsl.DSL._
+
+import org.clulab.habitus.scraper.Page
+class NhandanArticleScraper extends PageArticleScraper (NhandanDomain){
+  implicit val formats: DefaultFormats.type = DefaultFormats
+
+  def scrape(browser: Browser, page: Page, html: String): ArticleScrape = {
+    val doc = browser.parseString(html)
+    val title = doc.title
+    val jObject = (doc >> elementList("script"))
+      .find { element =>
+        element.hasAttr("type") && element.attr("type") == "application/ld+json"
+      }
+      .map { element =>
+        val json = element.innerHtml
+        val jObject = JsonMethods.parse(json).asInstanceOf[JObject]
+
+        jObject
+      }
+      .get
+
+    val dateline = (doc >> elementList("div.article__meta > time")).headOption.map(_.attr("datetime"))
+    val bylineOpt = (doc >> elementList("div.info-author > p")).headOption.map(_.text)
+
+    val paragraphs = doc >> elementList("div.article__body > p")
+    var text = ""
+    if (paragraphs.isEmpty) {
+      text = (doc >> element("div.article__body")).text
+    } else {
+      text = paragraphs
+        .map { paragraph =>
+          paragraph.text.trim
+        }
+        .filter(_.nonEmpty)
+        .mkString("\n\n")
+    }
+    ArticleScrape(page.url, Some(title), Some(dateline.get), bylineOpt, text,Some(""))
+  }
+}

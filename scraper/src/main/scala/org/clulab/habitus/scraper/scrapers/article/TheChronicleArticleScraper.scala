@@ -41,6 +41,6 @@ class TheChronicleArticleScraper extends PageArticleScraper(TheChronicleDomain) 
         .filter(_.nonEmpty)
         .mkString("\n\n")
 
-    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text)
+    ArticleScrape(page.url, Some(title), Some(dateline), bylineOpt, text,Some(""))
   }
 }

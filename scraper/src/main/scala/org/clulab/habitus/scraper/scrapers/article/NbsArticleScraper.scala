@@ -25,6 +25,6 @@ class NbsArticleScraper extends PageArticleScraper(NbsDomain) {
       .filterNot { text => text.head.isUpper && text.last == '/' && !text.contains(". ") }
       .mkString("\n\n")
 
-    ArticleScrape(page.url, Some(title), datelineOpt, bylineOpt, text)
+    ArticleScrape(page.url, Some(title), datelineOpt, bylineOpt, text,Some(""))
   }
 }
